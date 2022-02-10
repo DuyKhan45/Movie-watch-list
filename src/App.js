@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
 import './App.css';
+import "./lib/fontawesome-free-5.15.4-web/css/all.min.css"
+
+import Header from './Components/Header';
+import { Watched } from './Components/Watched';
+import { WatchList } from './Components/Watchlist';
+import { Add } from './Components/Add';
+import { GlobalProvider } from './Context/GlobalState';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <GlobalProvider>
+            <Router>
+                <Header />
+                <Routes>
+                    <Route path="/watched" element={<Watched/>} />
+                    <Route path="/" element={<WatchList/>} />
+                    <Route path="/add" element={<Add/>}/>
+                </Routes>
+            </Router>
+        </GlobalProvider>
+    );
 }
 
 export default App;
